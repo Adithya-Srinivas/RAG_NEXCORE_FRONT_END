@@ -9,6 +9,7 @@ type Message = {
 };
 
 const DRAIN_INTERVAL_MS = 20; // how often we reveal one queued token to the UI
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
 
 function Chat() {
   const [messages, setMessages] = useState<Message[]>([]);
@@ -101,7 +102,7 @@ function Chat() {
     pendingSources.current = null;
     streamDone.current = false;
 
-    const response = await fetch("http://localhost:8000/chat", {
+    const response = await fetch(`${API_URL}/chat`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ question, history }),

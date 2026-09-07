@@ -43,6 +43,8 @@ type EvalResults = {
   questions: QuestionResult[];
 };
 
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
+
 const axisStyle = { fill: "#898781", fontSize: 12 };
 const tooltipStyle = {
   background: "#fcfcfb",
@@ -82,7 +84,7 @@ function Dashboard() {
   const [data, setData] = useState<EvalResults | null>(null);
 
   useEffect(() => {
-    fetch("http://localhost:8000/eval/results")
+    fetch(`${API_URL}/eval/results`)
       .then((res) => res.json())
       .then(setData);
   }, []);
